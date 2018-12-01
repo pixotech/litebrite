@@ -5,8 +5,8 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            width: 40,
-            height: 40,
+            width: 12,
+            height: 12,
             palettes: [
                 {
                     id: 'first',
@@ -184,7 +184,20 @@ class App extends Component {
     }
 
     makeJSONDump() {
-        return JSON.stringify(this.state.cells.map(c => c.color));
+        const cellsInSerpentine = [];
+
+        for(let currentColumn = 0; currentColumn < this.state.width; currentColumn += 2) {
+            for(let currentRow = this.state.height - 1; currentRow >= 0; currentRow--) {
+                cellsInSerpentine.push(this.state.cells[this.state.width * currentRow + currentColumn]);
+            }
+            if(currentColumn + 1 < this.state.width) {
+                for (let currentRow = 0; currentRow < this.state.height; currentRow++) {
+                    cellsInSerpentine.push(this.state.cells[this.state.width * currentRow + currentColumn + 1]);
+                }
+            }
+        }
+
+        return JSON.stringify(cellsInSerpentine.map(c => c.color));
     }
 }
 

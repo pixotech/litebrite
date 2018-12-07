@@ -5,8 +5,8 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            width: 12,
-            height: 12,
+            width: 37,
+            height: 37,
             palettes: [
                 {
                     id: 'first',
